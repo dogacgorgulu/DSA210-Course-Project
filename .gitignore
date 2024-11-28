@@ -3,6 +3,7 @@
 *.json  # All JSON files
 *.xlsx  # All Excel files
 /data/
+/Hearthstone/data/
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
