@@ -1,6 +1,6 @@
 # DSA210-Course-Project
 
-# Important Note Regarding Project Proposa
+# Important Note Regarding Project Proposal
 
 I currently have two project ideas for this term project, with a preference for "Hearthstone (Arena) Analysis". However, I will make my final decision after receiving feedback. I prefer "Hearthstone (Arena) Analysis" since the dataset seems unique, and the other topic seems boring.
 
