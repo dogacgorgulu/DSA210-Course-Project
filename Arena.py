@@ -8,7 +8,7 @@ import matplotlib.pyplot as plt
 from sklearn.preprocessing import LabelEncoder
 
 # Load the data
-file_path = 'Hearthstone/data/ArenaData.xlsx'
+file_path = 'data/ArenaData_2.xlsx'
 data = pd.read_excel(file_path)
 
 # Create Win Rate column
@@ -16,6 +16,8 @@ data['Win Rate'] = data['W'] / (data['W'] + data['L'])
 
 # Create Win Rates by Classes
 class_win_rates = data.groupby('Class')['Win Rate'].mean()
+
+
 
 # Bar Plot
 class_win_rates.plot(kind='bar', figsize=(10, 6), title='Win Rate by Class')
@@ -76,7 +78,6 @@ plt.xticks(rotation=45)
 plt.legend()
 plt.show()
 
-
 # Transform Class and Archetype to numeric values using LabelEncoder
 label_encoders = {}
 for column in ['Class', 'Archetype']:
@@ -95,8 +96,20 @@ print(data.head())
 
 # Correlation Heatmap (with encoded columns)
 plt.figure(figsize=(12, 8))
-sns.heatmap(data.corr(), annot=True, fmt=".2f", cmap="coolwarm", cbar=True)
-plt.title("Correlation Heatmap (Including Encoded Columns)")
+sns.heatmap(data.corr(method='pearson'), annot=True, fmt=".2f", cmap="coolwarm", cbar=True)
+plt.title("Correlation Heatmap (pearson)")
+plt.show()
+
+# Correlation Heatmap (with encoded columns)
+plt.figure(figsize=(12, 8))
+sns.heatmap(data.corr(method='spearman'), annot=True, fmt=".2f", cmap="coolwarm", cbar=True)
+plt.title("Correlation Heatmap (spearman)")
+plt.show()
+
+# Correlation Heatmap (with encoded columns)
+plt.figure(figsize=(12, 8))
+sns.heatmap(data.corr(method='kendall'), annot=True, fmt=".2f", cmap="coolwarm", cbar=True)
+plt.title("Correlation Heatmap (kendall)")
 plt.show()
 
 # Card Distribution by Class

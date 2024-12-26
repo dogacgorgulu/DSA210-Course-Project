@@ -72,6 +72,12 @@ worst_combination = results_df.loc[results_df['Correlation'].idxmin()]
 print(best_combination.to_string())
 print(worst_combination.to_string())
 
+for element in best_combination:
+    print(element)
+
+# ['First Turn Playable', '3-Drops', 'Card Draw', '4-Drops', 'Late-game', '5-Drops']
+# 0.36762259494302996
+
 # Compute correlations
 # corr = data.corr()
 
