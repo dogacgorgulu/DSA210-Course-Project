@@ -20,6 +20,7 @@ df_q['Win Rate'] = df_q['W'] / df_q['Total Matches']
 print(df_c.head())
 print(df_q.head())
 
+
 # H_0: The mean Win Rate is the same for all Classes (FAILED TO REJECT)
 # Group win rates by class
 groups = [df_c[df_c['Class'] == cls]['Win Rate'] for cls in df_c['Class'].unique()]
