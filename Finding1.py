@@ -63,5 +63,5 @@ print(f"Levene’s Test Statistic: {stat}, p-value: {p}")
 # p-value: 0.6095329149643589 (Failed to reject)
 # Data is HOMOGENEOUS
 
-
+# Finding 1. The mean win rate is equal across all classes.
 
