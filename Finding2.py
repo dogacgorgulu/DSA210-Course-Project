@@ -9,6 +9,7 @@ import matplotlib.pyplot as plt
 from scipy.stats import shapiro
 from scipy.stats import anderson
 from scipy.stats import chi2_contingency
+from scipy.stats import kruskal
 
 ##
 ## READ DATA
@@ -27,7 +28,7 @@ df_q['Win Rate'] = df_q['W'] / df_q['Total Matches']
 print(df_c.head())
 print(df_q.head())
 
-## Null hypothesis: The mean win rate is equal across all Archetypes. (FAILED TO REJECT)
+## Null hypothesis: There is no significant difference in the mean win rates among the archetypes. (FAILED TO REJECT)
 ## Alternative Hypothesis: There is a significant difference in the mean win rates among the archetypes.
 
 # Group win rates by archetype
@@ -60,7 +61,6 @@ for cls in df_c['Archetype'].unique():
 # Mid-Range Win Rates - Shapiro-Wilk Test Statistic: 0.8492319354129841, p-value: 0.021683634097657948
 # Classic Control Win Rates - Shapiro-Wilk Test Statistic: 0.9293309387618782, p-value: 0.21210244830350308
 # Classic Aggro Win Rates - Shapiro-Wilk Test Statistic: 0.8641800383090643, p-value: 0.24364845662451412
-# Normality holds.
 
 # Perform Levene's Test
 stat, p = levene(*groups)
@@ -69,6 +69,17 @@ print(f"Levene’s Test Statistic: {stat}, p-value: {p}")
 # Levene’s Test Statistic: 1.1102347496364542, p-value: 0.3619139789956909 (Failed to reject)
 # Data is HOMOGENEOUS
 
-# ANOVA is valid
+# ANOVA is not valid (Normality does not hold. See F2_QQ.py)
 
-# Finding 2. The mean win rate is equal across all archetypes.
+# Perform the Kruskal-Wallis Test
+stat, p_value = kruskal(*groups)
+
+# Output results
+print(f"Kruskal-Wallis Test Statistic: {stat}")
+print(f"P-Value: {p_value}")
+
+# Kruskal-Wallis Test Statistic
+# P-Value: 0.5021950364552066
+# Fail to reject the null hypothesis.
+
+# Finding 2. There is no significant difference in the mean win rates among the archetypes.
