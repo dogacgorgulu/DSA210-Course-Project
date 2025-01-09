@@ -2,7 +2,7 @@ import seaborn as sns
 import matplotlib.pyplot as plt
 import pandas as pd
 import numpy as np
-from matplotlib.offsetbox import OffsetImage, AnnotationBbox
+import pingouin as pg
 
 # Load data
 df_c = pd.read_excel("data/ArenaData_categorical.xlsx")
@@ -64,4 +64,45 @@ plt.tight_layout()
 
 # Add legend
 plt.legend(title="Class", fontsize=10, loc='upper right', bbox_to_anchor=(1.2, 1.0))
+plt.show()
+
+# Classes
+classes = df_c['Class'].unique()
+
+# Define the grid layout dynamically
+num_classes = len(classes)
+cols = 3  # Number of columns
+rows = int(np.ceil(num_classes / cols))  # Calculate rows based on the number of classes
+
+# Set figure size dynamically based on the number of rows
+plt.figure(figsize=(cols * 5, rows * 5))  # Scale width and height proportionally
+
+for i, cls in enumerate(classes, 1):
+    class_data = df_c[df_c['Class'] == cls]['Win Rate']
+    
+    # Initialize variables
+    shapiro_result = None
+    p_value = None
+    
+    # Perform Shapiro-Wilk test only if there are at least 3 observations
+    if len(class_data) >= 3:
+        shapiro_result = pg.normality(class_data)
+        p_value = shapiro_result['pval'].values[0]
+    
+    # Plot Q-Q plot
+    ax = plt.subplot(rows, 3, i)
+    pg.qqplot(class_data, dist='norm', confidence=0.95, ax=ax)
+    
+    # Annotate the plot
+    if p_value is not None:
+        ax.set_title(f'{cls}\nShapiro-Wilk p = {p_value:.3f}', fontsize=10)
+    else:
+        ax.set_title(f'{cls}\n(Skipped Shapiro-Wilk Test)', fontsize=10)
+    
+    ax.set_xlabel('Theoretical Quantiles', fontsize=8)
+    ax.set_ylabel('Sample Quantiles', fontsize=8)
+
+# Adjust layout and add title
+plt.tight_layout(rect=[0, 0, 1, 0.95])
+plt.suptitle('Q-Q Plots with 95% Confidence Interval by Class', fontsize=16, y=0.98)
 plt.show()
