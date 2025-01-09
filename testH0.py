@@ -4,8 +4,12 @@ from scipy.stats import f_oneway
 from scipy.stats import levene
 import seaborn as sns
 from pingouin import welch_anova
+import scipy.stats as stats
+import matplotlib.pyplot as plt
 
-
+##
+## READ DATA
+##
 
 # df_c tonly includes categorical data
 df_c = pd.read_excel("data/ArenaData_categorical.xlsx")
@@ -20,10 +24,15 @@ df_q['Win Rate'] = df_q['W'] / df_q['Total Matches']
 print(df_c.head())
 print(df_q.head())
 
+##
+## 
+##
+## Null hypothesis: The mean win rate is equal across all classes. (FAILED TO REJECT)
+## Alternative Hypothesis: There is a significant difference in the mean win rates among the classes.
 
-# H_0: The mean Win Rate is the same for all Classes (FAILED TO REJECT)
 # Group win rates by class
 groups = [df_c[df_c['Class'] == cls]['Win Rate'] for cls in df_c['Class'].unique()]
+
 # Perform ANOVA
 f_stat, p_val = f_oneway(*groups)
 print(f"ANOVA F-statistic: {f_stat}, p-value: {p_val}")
@@ -31,6 +40,7 @@ print(f"ANOVA F-statistic: {f_stat}, p-value: {p_val}")
 # F-statistic: 0.6326618402826653, p-value: 0.7780008552299287
 
 ######################
+
 # H_0: The mean Win Rate is the same for all Archetypes (FAILED TO REJECT)
 # Group win rates by Archetype
 groups = [df_c[df_c['Archetype'] == archetype]['Win Rate'] for archetype in df_c['Archetype'].unique()]
@@ -77,7 +87,13 @@ print(f"ANOVA F-statistic: {f_stat}, p-value: {p_val}")
 # p > 0.05
 # Fail to reject the null hypothesis 
 # Indicates no significant differences in win rates between the Class groups.
+# Normality Test for Class Summary
+stats.probplot(class_summary['Win Rate'], dist="norm", plot=plt)
+plt.title("Q-Q Plot for Class Win Rates")
+plt.show()
 
+stat, p = stats.shapiro(class_summary['Win Rate'])
+print(f"Class Win Rates - Shapiro-Wilk Test Statistic: {stat}, p-value: {p}")
 
 # Bar plot of aggregated Win Rates by Class
 sns.barplot(data=class_summary, x='Class', y='Win Rate', palette='pastel')
@@ -117,16 +133,7 @@ plt.show()
 # Fail to reject the null hypothesis 
 # Indicates no significant differences in win rates between the Archetype groups.
 
-import scipy.stats as stats
-import matplotlib.pyplot as plt
 
-# Normality Test for Class Summary
-stats.probplot(class_summary['Win Rate'], dist="norm", plot=plt)
-plt.title("Q-Q Plot for Class Win Rates")
-plt.show()
-
-stat, p = stats.shapiro(class_summary['Win Rate'])
-print(f"Class Win Rates - Shapiro-Wilk Test Statistic: {stat}, p-value: {p}")
 
 # Normality Test for Archetype Summary
 stats.probplot(archetype_summary['Win Rate'], dist="norm", plot=plt)
@@ -136,12 +143,7 @@ plt.show()
 stat, p = stats.shapiro(archetype_summary['Win Rate'])
 print(f"Archetype Win Rates - Shapiro-Wilk Test Statistic: {stat}, p-value: {p}")
 
-# Levene's Test for Class
-stat, p = levene(class_summary['Win Rate'], [1] * len(class_summary))
-print(f"Class Win Rates - Levene’s Test Statistic: {stat}, p-value: {p}")
-# p-value: 0.006084786932541696
-# NOT HOMOGENEOUS
-# CONSIDER Welch's ANOVA
+
 
 # Levene's Test for Archetype
 stat, p = levene(archetype_summary['Win Rate'], [1] * len(archetype_summary))
