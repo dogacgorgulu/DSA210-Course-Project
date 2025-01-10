@@ -48,7 +48,7 @@ plt.figure(figsize=(12, 8))
 for i, group_data in enumerate(groups):
     # Scatter points for each class
     x_coords = np.full_like(group_data, i + 1, dtype=float)  # x-coordinates for the group
-    plt.scatter(x_coords, group_data, label=classes[i], s=50, alpha=0.7)
+    plt.scatter(x_coords, group_data, color='blue', label=classes[i], s=500, alpha=0.25)
 
     # Mean line for each class
     mean = group_data.mean()
@@ -58,7 +58,7 @@ for i, group_data in enumerate(groups):
 plt.xticks(range(1, len(classes) + 1), classes, fontsize=12)
 plt.xlabel('Class', fontsize=14)
 plt.ylabel('Win Rate', fontsize=14)
-plt.title('Win Rate by Class (With Means) per Draft', fontsize=16)
+plt.title('Win Rate by Class with Means per Draft', fontsize=16)
 plt.grid(axis='y', linestyle='--', alpha=0.6)
 plt.tight_layout()
 

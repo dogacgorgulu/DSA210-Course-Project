@@ -33,7 +33,7 @@ plt.figure(figsize=(12, 8))
 for i, group_data in enumerate(groups):
     # Scatter points for each Archetype
     x_coords = np.full_like(group_data, i + 1, dtype=float)  # x-coordinates for the group
-    plt.scatter(x_coords, group_data, label=classes[i], s=50, alpha=0.7)
+    plt.scatter(x_coords, group_data, color='blue', label=classes[i], s=1000, alpha=0.25)
 
     # Mean line for each Archetype
     mean = group_data.mean()
@@ -43,7 +43,7 @@ for i, group_data in enumerate(groups):
 plt.xticks(range(1, len(classes) + 1), classes, fontsize=12)
 plt.xlabel('Archetype', fontsize=14)
 plt.ylabel('Win Rate', fontsize=14)
-plt.title('Win Rate by Class (With Means) per Draft', fontsize=16)
+plt.title('Win Rate by Archetype with Means per Draft', fontsize=16)
 plt.grid(axis='y', linestyle='--', alpha=0.6)
 plt.tight_layout()
 
@@ -91,3 +91,4 @@ for i, cls in enumerate(classes, 1):
 plt.tight_layout(rect=[0, 0, 1, 0.95])
 plt.suptitle('Q-Q Plots with 95% Confidence Interval by Archetype', fontsize=16, y=0.98)
 plt.show()
+
