@@ -35,7 +35,7 @@ The motivation behind this project is to determine optimal deck-building strateg
 
 #### Data Sets
 
-* Categorical Data [`data`](/data/ArenaData_categorical.xlsx)
+* Categorical Data
 
 | Class        |   W |   L |   Total Matches | Archetype   |   Win Rate |
 |:-------------|----:|----:|----------------:|:------------|-----------:|
@@ -54,7 +54,7 @@ A **deck** is a set of 30 cards. A **match** is a single game played with a deck
 * Archetype: The playing strategy of a deck.
 * Win Rate = W / Total Matches
 
-* Quantitative Data [`data`](/data/ArenaData_quantitative.xlsx)
+* Quantitative Data
 
 |   W |   L |   Total Matches |   Tierscore |   First Turn Playable |   2-Drops |   3-Drops |   4-Drops |   5-Drops |   Late-game |   Pings |   Early Removals |   Large Removals |   Board clear |   Reach |   Card Draw |   Win Rate |
 |----:|----:|----------------:|------------:|----------------------:|----------:|----------:|----------:|----------:|------------:|--------:|-----------------:|-----------------:|--------------:|--------:|------------:|-----------:|
