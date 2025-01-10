@@ -1,9 +1,9 @@
 # DSA210-Course-Project
 
+Click [HERE](https://dogacgorgulu.com/hearthstone/index.html) for the detailed report.
+
 ## Table of Contents
 **[Motivation](#motivation)**  
-
-**[Tools](#tools)**  
 
 **[Data](#data)**  
 * [Data Sources](#data-sources)
@@ -79,20 +79,16 @@ A **deck** is a set of 30 cards. A **match** is a single game played with a deck
 * Card Draw: Number of cards that enable card draw.
 * Win Rate = W / Total Matches
 
-### Tools
-
-**[Pandas](https://pandas.pydata.org/):**
-**[Altair](https://altair-viz.github.io/index.html):**
-**[Matplotlib](https://matplotlib.org/) and [Seaborn](https://seaborn.pydata.org/):**
-**[Numpy](https://numpy.org/):** 
-**[Scipy](https://www.scipy.org/):**
-
-### Data Analysis
-
 ### Findings
+
+* [Finding 1](https://dogacgorgulu.com/hearthstone/finding1.html)
+* [Finding 2](https://dogacgorgulu.com/hearthstone/finding2.html)
+* [Finding 3](https://dogacgorgulu.com/hearthstone/finding3.html)
 
 ### Limitations
 
-* Couldn't validate Normality for Finding 1 due to size 2 < 3 for class Druid (Assumptions of ANOVA).
+* Couldn't validate Normality for Finding 1 due to size, for class Druid & Death Knight.
 
 ### Future Work
+
+* The performance of custom archetypes could be evaluated through class pairings and against each archetype individually.
